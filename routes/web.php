@@ -13,16 +13,23 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\CustomerAuthController;
+use App\Http\Controllers\PembelianController;
 
 // Beranda publik
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 
 // Auth
-Route::get('/login',    [AuthController::class,   'showLogin'])->name('login');
-Route::post('/login',   [AuthController::class,   'login'])->name('login.post');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/register', [RegisterController::class,'showRegister'])->name('register');
-Route::post('/register',[RegisterController::class,'register'])->name('register.post');
+Route::get('/admin/login', [AuthController::class, 'showLogin'])
+    ->name('admin.login');
+Route::post('/admin/login', [AuthController::class, 'login'])
+    ->name('admin.login.post');
+Route::post('/logout', [AuthController::class, 'logout'])
+    ->name('logout');
+Route::get('/register', [RegisterController::class,'showRegister'])
+    ->name('register');
+Route::post('/register',[RegisterController::class,'register'])
+    ->name('register.post');
 
 // Protected Routes
 Route::middleware('auth.custom')->group(function () {
@@ -63,4 +70,18 @@ Route::middleware('auth.custom')->group(function () {
     Route::get('/profil',                  [ProfilController::class, 'index'])->name('profil.index');
     Route::put('/profil',                  [ProfilController::class, 'update'])->name('profil.update');
     Route::post('/profil/reset-password',  [ProfilController::class, 'resetPassword'])->name('profil.reset-password');
+
+    Route::get('/pembelian', [PembelianController::class, 'index'])->name('pembelian.index');
+    Route::put('/pembelian/{id}/status', [PembelianController::class, 'updateStatus'])->name('pembelian.updateStatus');
+    Route::put('/pembelian/{id}/konfirmasi', [PembelianController::class, 'konfirmasiPembayaran'])->name('pembelian.konfirmasi');
 });
+
+// Customer Auth
+Route::get('/login', [CustomerAuthController::class, 'showLogin'])
+    ->name('login');
+
+Route::post('/login', [CustomerAuthController::class, 'login'])
+    ->name('login.post');
+
+Route::post('/customer/logout', [CustomerAuthController::class, 'logout'])
+    ->name('customer.logout');

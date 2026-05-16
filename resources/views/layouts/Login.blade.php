@@ -30,23 +30,20 @@
             <div class="alert alert-success"><i class="fas fa-check-circle"></i> {{ session('success') }}</div>
         @endif
 
-        <form action="{{ route('login.post') }}" method="POST">
+        <form action="{{ route('admin.login.post') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="username">Username</label>
                 <div class="input-icon">
                     <i class="fas fa-user"></i>
-                    <input type="text" id="username" name="username"
-                           placeholder="Masukkan username"
-                           value="{{ old('username') }}" required>
+                    <input type="username" id="username" name="username">
                 </div>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
                 <div class="input-icon">
                     <i class="fas fa-lock"></i>
-                    <input type="password" id="password" name="password"
-                           placeholder="Masukkan Password" required>
+                    <input type="password" id="password" name="password">
                 </div>
             </div>
             <button type="submit" class="login-btn">
@@ -54,7 +51,7 @@
             </button>
         </form>
 
-        <div class="login-links">
+        <div class="login-links"></div>
             Belum punya akun? <a href="{{ route('register') }}">Register</a>
         </div>
         <a href="{{ route('beranda') }}" class="login-back">&larr; Kembali ke beranda</a>

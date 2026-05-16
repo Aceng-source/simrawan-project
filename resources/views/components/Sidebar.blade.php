@@ -80,4 +80,16 @@
             <div class="role">Administrator</div>
         </div>
     </div>
+
+    <li>
+    <a href="{{ route('pembelian.index') }}" class="{{ request()->routeIs('pembelian.*') ? 'active' : '' }}">
+        <i class="fas fa-shopping-cart"></i> Pembelian
+        @php
+            $pesananMenunggu = \App\Models\Transaksi::where('status', 'Menunggu')->count();
+        @endphp
+        @if($pesananMenunggu > 0)
+            <span style="margin-left:auto;background:var(--danger);color:#fff;font-size:0.6rem;padding:2px 6px;border-radius:10px;">{{ $pesananMenunggu }}</span>
+        @endif
+    </a>
+    </li>
 </aside>
